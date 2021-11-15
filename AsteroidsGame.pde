@@ -1,5 +1,5 @@
 Spaceship ship = new Spaceship();
-Star[] stars = new Star[50];
+Star[] stars = new Star[65];
 
 public void setup() {
   size(800, 800);
@@ -21,7 +21,7 @@ public void draw() {
 
 public void keyPressed() {
   if (key == 'w') {
-    ship.accelerate(1);
+    ship.accelerate(0.25);
   }
 
   if (key == 'a') {
@@ -29,13 +29,13 @@ public void keyPressed() {
   }
 
   if (key == 's') {
-    ship.accelerate(-1);
+    ship.accelerate(-0.25);
   }
 
   if (key == 'd') {
     ship.turn(10);
   }
-  
+
   if (key == 'h') {
     ship.setXSpeed(0);
     ship.setYSpeed(0);
