@@ -3,18 +3,19 @@
 * {
   font-family: "DM Mono", monospace;
   font-size: 0.7em;
+    text-align: center;
   color: white;
 }
 
 body {
   background-color: #000000;
-  text-align: center;
 }
 
 div {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 canvas {
