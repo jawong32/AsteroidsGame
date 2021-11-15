@@ -2,13 +2,13 @@
 
 * {
   font-family: "DM Mono", monospace;
-  font-size: 0.7em;
-    text-align: center;
+  font-size: 1rem;
+  text-align: center;
   color: white;
 }
 
 body {
-  background-color: #000000;
+  background-color: black;
 }
 
 div {
