@@ -1,10 +1,9 @@
 Spaceship ship = new Spaceship();
 Star[] stars = new Star[65];
-Asteroid[] asteroids = new Asteroid[30];
+Asteroid[] asteroids = new Asteroid[1];
 
 public void setup() {
   size(800, 800);
-  noStroke();
   for (int i = 0; i < stars.length; i++) {
     stars[i] = new Star();
   }
