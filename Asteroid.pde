@@ -1,11 +1,13 @@
 class Asteroid extends Floater {
   private double rotSpeed;
+  private double ogX;
+  private double ogY;
 
   public Asteroid() {
     corners = (int) (Math.random() * 4) + 10;
     myColor = color(0);
-    myCenterX = 0;
-    myCenterY = 0;
+    myCenterX = Math.random() * 801;
+    myCenterY = Math.random() * 801;
     xCorners = new int[corners];
     yCorners = new int[corners];
     xCorners[0] = (int) (Math.random() * 100) + 60;
@@ -15,6 +17,8 @@ class Asteroid extends Floater {
 
     myCenterX = (xCorners[0] + xCorners[corners / 2]) / 2;
     myCenterY = yCorners[0];
+    ogX = myCenterX;
+    ogY = myCenterY;
 
     for (int i = 1; i < corners / 2; i++) {
       int nextX;
@@ -39,30 +43,47 @@ class Asteroid extends Floater {
     myXspeed = Math.random() * -2 + 1;
     myYspeed = Math.random() * -2 + 1;
     myPointDirection = Math.random() * 361 * (180 / PI);
-    rotSpeed = Math.random() * 0.005 * (180 / PI);
+    rotSpeed = Math.random() * 0.01 * (180 / PI);
   }
 
-  // Have to override show to have fill be different from stroke
+  // Had to override show to have fill be different from stroke
   public void show() {
     fill(myColor);   
     stroke(255);    
     strokeWeight(5);
-    translate((float)myCenterX, (float)myCenterY);
+    pushMatrix();
+    translate((float) (myCenterX - ogX), (float) (myCenterY - ogY));
     float dRadians = (float)(myPointDirection*(Math.PI/180));
     rotate(dRadians);
     beginShape();
     for (int nI = 0; nI < corners; nI++) {
       vertex(xCorners[nI], yCorners[nI]);
     }
-    ellipse((float) myCenterX, (float) myCenterY, 30, 30);
     endShape(CLOSE);
-    rotate(-1*dRadians);
-    translate(-1*(float)myCenterX, -1*(float)myCenterY);
+    popMatrix();
+    //ellipse((float) myCenterX, (float) myCenterY, 30, 30);
+
     strokeWeight(1);
   }
 
+
+  // Had to override to wrap correctly
   public void move() {
-    super.move();
+    myCenterX += myXspeed;    
+    myCenterY += myYspeed;     
+
+    if (myCenterX > width + 100) {     
+      myCenterX = -100;
+    } else if (myCenterX < -100) {     
+      myCenterX = width;
+    }    
+    
+    if (myCenterY > height + 100) {    
+      myCenterY = -100;
+    } else if (myCenterY < -100) {     
+      myCenterY = height + 100;
+    }
+    
     turn(rotSpeed);
   }
 }
